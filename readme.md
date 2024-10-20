@@ -11,3 +11,17 @@ It's a monad (sorry 🍪).
 ## Installation
 
 `pip install -e encapsulation`
+
+## Getting started
+
+Get started by 
+
+```
+from encapsulation.base import From
+
+obj = From(
+    lambda x: "hi " + x        
+    )("there")
+
+print(obj)
+```
