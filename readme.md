@@ -10,4 +10,4 @@ It's a monad (sorry 🍪).
 
 ## Installation
 
-`pip install from`
+`pip install -e encapsulation`

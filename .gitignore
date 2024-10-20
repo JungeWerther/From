@@ -3,3 +3,6 @@ __pycache__
 env/
 setup.py
 setup.cfg
+build/
+dist/
+*.egg-info/
