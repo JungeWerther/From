@@ -17,6 +17,7 @@ class From(Generic[T]):
         
     def __call__(self, *_, **kwargs):
         """This one also needs work / validation"""
+        assert(isinstance(arg, Callable) for arg in self.args)
         return self.args[0](*_, **kwargs) 
 
     def __name__(self):
@@ -24,10 +25,14 @@ class From(Generic[T]):
 
     def __repr__(self):
         return "[obfuscated]"
-    
+
+    @classmethod
+    def _next(cls, *args):
+        return cls(*args)
+
     def _ext(self, func: Callable, *args):
         self.Fn(func, args)
-        return From[T](*args)
+        return self._next(*args)
 
     def Fn(self, func, *args):
         func(*args) 
@@ -35,7 +40,7 @@ class From(Generic[T]):
     def apply(self, func: Callable = id):
         return lambda *args: self._ext(func, *args)
 
-    def to(self, to: T, Fn: Callable[[T], Any] = id):
+    def to(self, to: Callable[[T], Any] | T, Fn: Callable[[T], Any] = id):
         return self._ext(Fn, to) 
 
     def first(self, Fn: Callable):

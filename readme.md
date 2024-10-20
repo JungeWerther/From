@@ -25,3 +25,28 @@ obj = From(
 
 print(obj)
 ```
+
+*Easy* decorator superpowers:
+
+```python
+from encapsulation.base import From
+
+def inspect(x: str): 
+    """some function you want to call each time"""
+    print(x)
+  
+# you can also turn inspect into a proper decorator using
+agent = From().apply(inspect)
+
+@agent
+def task(val: str):
+    """Some task"""
+    print("[this is a task]")
+
+task("hiho")
+```
+
+The above will both evaluate `task("hiho")` and leave its return type untouched, while also
+executing `agent(task)` each time the `task` function gets called.
+
+Congratulations! You can now stop writing convoluted wrappers each time you want to implement a decorator, and use `From` instead 😎

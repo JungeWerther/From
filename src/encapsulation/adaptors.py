@@ -30,12 +30,12 @@ if __name__ == "__main__":
     @inspect
     def good(val):
         """[Good...]"""
-        print("good", val)
+        print("[good]", val)
  
-    # but the type of `good` is `From`!
+    # the type of `good` becomes `From`!
     # assert type(inspect(good)) == type(inspect(inspect(good))) 
 
-    good("morning", "there") # always runs without any change (input and output types remain the same) 
+    good("morning") # always runs without any change (input and output types remain the same) 
     print("============")
 
 
@@ -52,3 +52,15 @@ if __name__ == "__main__":
         "morning to you too.", print).to(
         "hello", good 
         )
+
+    # you can also turn inspect into a proper decorator using
+    agent = From().apply(inspect)
+
+    @agent
+    def task(val: str):
+        """Some task"""
+        print("[this is a task]")
+        return "hohoho"
+
+    print(task("hiho"))
+

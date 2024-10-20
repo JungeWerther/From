@@ -4,15 +4,7 @@ from typing import TypeVar
 T = TypeVar("T")
 
 class SideEffect(From[T]):
-    """To add a side-effect, all you need to do is implement an
-    `_ext` method. 
-    
-    Looking for a way to return self.__class__ each time to abstract this even further!
-    """
-    def _ext(self, func, *args):
-        self.Fn(func, *args)
-        return SideEffect[T](*args)
-
+    """To add a side-effect, all you need to do is implement the `Fn` method """
     def Fn(self, func, *args):
         print("hi there")
         func(*args) 
