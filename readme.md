@@ -36,6 +36,7 @@ def inspect(x: str):
     print(x)
 
 def compose(func, *args):
+    inspect(func)
     func(*args)
 
 # you can also turn inspect into a proper decorator using
