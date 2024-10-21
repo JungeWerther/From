@@ -34,9 +34,12 @@ from encapsulation.base import From
 def inspect(x: str): 
     """some function you want to call each time"""
     print(x)
-  
+
+def compose(func, *args):
+    func(*args)
+
 # you can also turn inspect into a proper decorator using
-agent = From().apply(inspect)
+agent = From(Fn=compose).apply
 
 @agent
 def task(val: str):
