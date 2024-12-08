@@ -1,12 +1,9 @@
-# The encapsulation library 
+# The encapsulation library
 
 Introducing: the `From` class.
-
-Decorators made easy, piece-wise oprations on product types, controlling evaluation order.
-
 For maintainable data pipelines.
 
-It's a monad (sorry 🍪).
+Adds new syntactic sugar to python!
 
 ## Installation
 
@@ -14,43 +11,38 @@ It's a monad (sorry 🍪).
 
 ## Getting started
 
-Get started by 
-
-```
-from encapsulation.base import From
-
-obj = From(
-    lambda x: "hi " + x        
-    )("there")
-
-print(obj)
-```
-
-*Easy* decorator superpowers:
+Get started by
 
 ```python
-from encapsulation.base import From
+from encapsulation.base import Maybe
 
-def inspect(x: str): 
-    """some function you want to call each time"""
-    print(x)
-
-def compose(func, *args):
-    inspect(func)
-    func(*args)
-
-# you can also turn inspect into a proper decorator using
-agent = From(Fn=compose).apply
-
-@agent
-def task(val: str):
-    """Some task"""
-    print("[this is a task]")
-
-task("hiho")
+Maybe("a") + "b" # outputs <Maybe val=(ab)>
+Maybe(None) * 2 # outputs <Nothing val=(None)>
 ```
 
-The above will both evaluate `task("hiho")` and leave its return type untouched, while also
-executing `agent(task)` each time the `task` function gets called.
+_Easy to use_ decorators that elevate functions to return wrapped values instead:
 
-Congratulations! You can now stop writing convoluted wrappers each time you want to implement a decorator, and use `From` instead 😎
+```python
+from encapsulation.base import Maybe, to
+
+def add1(n: int):
+    return n + 1
+
+@to(Maybe)
+def (s: int):
+    return s
+
+test(1).bind(add1).effect(print) # prints '[2]'
+```
+
+You can chain computations using compose(). For example
+
+```python
+from encapsulation.base import Just, compose
+
+@to(Just[int])
+def add2(s: int):
+    return s
+
+compose(Just(1), add2, add2) # equals Just(5)
+```
