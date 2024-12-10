@@ -42,7 +42,7 @@ from encapsulation.base import Just, compose
 
 @to(Just[int])
 def add2(s: int):
-    return s
+    return s + 2
 
 compose(Just(1), add2, add2) # equals Just(5)
 ```
