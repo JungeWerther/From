@@ -29,10 +29,10 @@ def add1(n: int):
     return n + 1
 
 @to(Maybe)
-def (s: int):
+def test(s: int):
     return s
 
-test(1).bind(add1).effect(print) # prints '[2]'
+test(1).bind(add1).effect(print) # prints '2'
 ```
 
 You can chain computations using compose(). For example
