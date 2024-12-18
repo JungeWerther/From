@@ -58,8 +58,11 @@ class From(Generic[T]):
         for i in self.val:
             yield self.unit(i)
 
-    def __rshift__(self, method):
+    def __lshift__(self, method):
         return self.bind(method)
+
+    def __and__(self, method):
+        return self.effect(method)
 
     @classmethod
     def unit(cls, val: U) -> "From[U]":
@@ -112,7 +115,7 @@ M = TypeVar("M", bound=From)
 
 def to(cls: type[From[U]]):
     def outer(func: Callable[[U], T]) -> Callable[[U], From[T]]:
-        return lambda *args, **kwargs: cls(*args, **kwargs).bind(func)
+        return lambda *args, **kwargs: cls(*args, **kwargs) >> func
 
     return outer
 
@@ -167,4 +170,14 @@ if __name__ == "__main__":
     assert isinstance(Result(1) / Result(1), Success)
     assert not isinstance(Result(1) / Result(0), Success)
 
-    Result(1) >> add1 >> (lambda i: "[cool, I can chain...] " + str(i)) >> print
+    Result(1) << add1 << (lambda i: "[cool, I can chain...] " + str(i)) & print
+
+    x = Result(1) / Result(0)
+
+    match x:
+        case Success():
+            print("joepie")
+        case Error():
+            print("pop")
+
+    print("blanla")
