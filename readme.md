@@ -1,6 +1,13 @@
+
+## Would you rather write
+![image](https://github.com/user-attachments/assets/773e0657-4376-4fe6-b516-395751146c2b)
+## or ...
+![image](https://github.com/user-attachments/assets/16f602f0-5718-468c-9114-3e3e673ca02f)
+
+## ... 🤔 ?
+
 # The encapsulation library
 
-![image](https://github.com/user-attachments/assets/16f602f0-5718-468c-9114-3e3e673ca02f)
 
 Introducing: the `From` class.
 For maintainable data pipelines.
