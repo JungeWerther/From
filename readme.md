@@ -40,7 +40,7 @@ def add1(n: int):
 def test(s: int):
     return s
 
-test(1) << (add1) & (print) # prints '2'
+test(1) << add1 & print << add1 # prints '2', while returning Maybe(3)
 ```
 
 You can chain computations using compose(). For example
