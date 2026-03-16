@@ -1,0 +1,14 @@
+[project]
+name = "encapsulation"
+version = "0.2.1"
+description = "The Encapsulation Library — Functional Programming in Python"
+readme = "readme.md"
+license = "MIT"
+requires-python = ">=3.12"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.backends"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/encapsulation"]
